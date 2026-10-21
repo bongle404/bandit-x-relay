@@ -19,3 +19,8 @@ Posts every new @banditdotbot post on X into the Bandit Telegram group. Part of 
 - Repo is public so Actions minutes are free; private repos get 2,000 min/mo, and this needs ~8,600. Code holds no secrets.
 - GitHub pauses scheduled jobs after 60 days with no commits. A quiet X account (no new posts → no state commits) will trip this; re-enable under the Actions tab.
 - If the state push fails, the next run can re-send that post (rare).
+
+## Status 2026-10-21
+- Repo public: https://github.com/bongle404/bandit-x-relay . Workflow DISABLED until secrets are set (`gh workflow enable relay.yml`).
+- Set: TG_CHAT_ID = -1004354910101 (group "Bandit's Garage"), TG_THREAD_ID = 21 (topic "X Posts", created 10-21).
+- Ed to do: make @banditdotbot a group admin; X dev account + $5 credit + bearer token; set X_BEARER_TOKEN + TG_BOT_TOKEN.
