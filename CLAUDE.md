@@ -23,4 +23,4 @@ Posts every new @banditdotbot post on X into the Bandit Telegram group. Part of 
 ## Status 2026-10-21
 - Repo public: https://github.com/bongle404/bandit-x-relay . Workflow DISABLED until secrets are set (`gh workflow enable relay.yml`).
 - Set: TG_CHAT_ID = -1004354910101 (group "Bandit's Garage"), TG_THREAD_ID = 21 (topic "X Posts", created 10-21).
-- Ed to do: make @banditdotbot a group admin; X dev account + $5 credit + bearer token; set X_BEARER_TOKEN + TG_BOT_TOKEN.
+- 10-22: bot admin DONE (Ed). X dev account exists ("Bandit", app on Pay Per Use, $0 balance, no card on file; X matches first purchase up to $20). Ed to do: buy credits, copy bearer token, set X_BEARER_TOKEN + TG_BOT_TOKEN.
