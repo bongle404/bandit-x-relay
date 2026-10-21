@@ -1,7 +1,7 @@
 """Run: python3 test_relay.py"""
 from relay import relay
 
-USER = {"data": {"id": "42"}}
+USER = {"data": {"id": "42", "username": "banditdotbot", "name": "Bandit"}}
 
 
 def fake_x(timeline):
@@ -18,7 +18,7 @@ def fake_x(timeline):
 state, sent = {}, []
 fetch, _ = fake_x([{"id": "300", "text": "c"}, {"id": "200", "text": "b"}])
 assert relay(state, fetch, sent.append) == 0 and sent == []
-assert state == {"user_id": "42", "last_id": "300"}
+assert state == {"user_id": "42", "username": "banditdotbot", "last_id": "300"}
 
 # New posts arrive newest-first from X; they go out oldest-first.
 fetch, calls = fake_x([{"id": "1000", "text": "new2"}, {"id": "900", "text": "new1"}])

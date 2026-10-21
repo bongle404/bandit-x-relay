@@ -43,7 +43,10 @@ def relay(state, fetch, send):
     """Send posts newer than state['last_id'], oldest first. Mutates state as it goes."""
     if "user_id" not in state:
         # Profile lookups cost more than post reads, so do it once and keep it.
-        state["user_id"] = fetch(f"/users/by/username/{HANDLE}")["data"]["id"]
+        user = fetch(f"/users/by/username/{HANDLE}")["data"]
+        print(f"watching @{user['username']} ({user['name']}), id {user['id']}")
+        state["user_id"] = user["id"]
+        state["username"] = user["username"]
 
     params = {"exclude": "replies,retweets", "max_results": 5 if "last_id" not in state else 100}
     if "last_id" in state:
