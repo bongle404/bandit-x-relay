@@ -11,7 +11,7 @@ import urllib.request
 from pathlib import Path
 
 HANDLE = os.environ.get("X_HANDLE", "banditdotbot")
-STATE = Path(__file__).with_name("state.json")
+STATE = Path(__file__).with_name(os.environ.get("STATE_FILE", "state.json"))
 X_API = "https://api.x.com/2"
 
 
