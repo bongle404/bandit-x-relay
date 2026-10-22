@@ -114,6 +114,8 @@ def main():
         sent = relay(state, x_get, tg_send)
         print(f"relayed {sent} post(s)")
         if os.environ.get("TG_VISUAL_THREAD_ID"):
+            me = tg_call("getChatMember", {"chat_id": os.environ["TG_CHAT_ID"], "user_id": tg_call("getMe", {})["id"]})
+            print(f"bot status: {me['status']}, can delete: {me.get('can_delete_messages', False)}")
             # ponytail: runs on the 5-15 min schedule, so text sits there until the next run; a webhook makes it instant
             print(f"deleted {sweep(state, tg_call, os.environ['TG_CHAT_ID'], os.environ['TG_VISUAL_THREAD_ID'])} non-visual message(s)")
     finally:
