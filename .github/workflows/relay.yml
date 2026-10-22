@@ -24,6 +24,7 @@ jobs:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           TG_THREAD_ID: ${{ secrets.TG_THREAD_ID }}
+          TG_VISUAL_THREAD_ID: "4"  # Content topic: images/videos/GIFs/stickers only
       - name: Save state
         if: always()
         run: |

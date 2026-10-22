@@ -50,4 +50,36 @@ fetch, _ = fake_x([{"id": "1300", "text": "a" * 5000}])
 relay(state, fetch, sent.append)
 assert len(sent[-1]) < 4096
 
+# Visual-only topic sweep.
+from relay import sweep
+
+
+def msg(uid, thread, user, **content):
+    return {"update_id": uid, "message": {"message_id": uid, "chat": {"id": -100}, "message_thread_id": thread, "from": {"id": user}, **content}}
+
+
+updates = [
+    msg(1, 4, 7, text="gm"),                                        # text in Content -> delete
+    msg(2, 4, 7, photo=[{}], caption="look"),                       # photo -> keep
+    msg(3, 4, 7, document={"mime_type": "application/pdf"}),        # pdf -> delete
+    msg(4, 4, 7, document={"mime_type": "video/mp4"}),              # video file -> keep
+    msg(5, 4, 99, text="admin note"),                               # admin -> keep
+    msg(6, 1, 7, text="hi"),                                        # other topic -> keep
+    msg(7, 4, 7, sticker={}),                                       # sticker -> keep
+    msg(8, 4, 7, forum_topic_edited={}),                            # service msg -> keep
+]
+deleted, st = [], {}
+
+
+def call(method, params):
+    if method == "getUpdates":
+        return updates
+    if method == "getChatAdministrators":
+        return [{"user": {"id": 99}}]
+    deleted.append(params["message_id"])
+
+
+assert sweep(st, call, -100, 4) == 2 and deleted == [1, 3]
+assert st["tg_offset"] == 9
+
 print("ok")
