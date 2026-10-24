@@ -1,0 +1,19 @@
+name: Topic icons
+
+on:
+  workflow_dispatch:
+    inputs:
+      icons:
+        description: "topic_id=emoji pairs, comma separated"
+        default: "4=🎬,21=📰"
+
+jobs:
+  icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 topic_icons.py
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          TOPIC_ICONS: ${{ inputs.icons }}
